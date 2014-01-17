@@ -9,7 +9,7 @@ html {
 	background: #eee;	
 	padding: 0px;
 	margin:    0 auto;
-    max-width: 960px;
+    max-width: 800px;
     height: 100%;
 	padding-left: 0px; 
 }
@@ -46,7 +46,7 @@ h6              { font-size: 1.0em; line-height: 0.5em; margin: 1.67em 0 }
 
 header {
 	margin-top: 60px;
-	width: 960px;
+	width: 800px;
 	
     /*background: orange;*/
 	/*background: url("../img/header_bg.gif");
@@ -62,7 +62,7 @@ header h1 {
 }
 
 nav {
-	width: 960px;
+	width: 800px;
 	margin: 0px;
 	padding: 0px;
 	
@@ -88,7 +88,7 @@ nav li a:hover {
 
 footer {
 	height: 25px;
-	width: 960px;
+	width: 800px;
 	position: fixed;
 	bottom: 0;
 	
@@ -100,7 +100,7 @@ footer hr {
 }
 
 #sticky {
-	width: 960px;
+	width: 800px;
 	position: absolute;
 	background: #eee;
 }
