@@ -1,0 +1,478 @@
+@charset "utf-8";
+
+
+/*
+	GRAHAM.
+	This document defines standard values for HTML tags
+*/
+
+/*
+
+black: #333
+white: #e5e5e5
+orange: #ff4100
+green: #99cf16
+pink: #f14385
+blue: #0098bc
+blue2: #005266
+purple: #611488
+
+*/
+
+* {
+    margin: 0; 
+    padding: 0;
+    font-family: "Gill Sans", Verdana, "Myriad Pro", sans-serif;
+}
+
+html {
+	/* cf. http://www.hicksdesign.co.uk/journal/forcing-scrollbars-now-even-better */
+	height: 100%;
+	margin-bottom: 1px;
+}
+
+body {
+	/*background: #111 url("img/an_background_01.jpg") no-repeat fixed top left; #eee*/	
+	background: #eee;	
+	margin-top: 0;
+	padding: 0;
+}
+
+p {
+	margin-top: 1em;
+	line-height: 21px;
+	font-size: 14px;
+	color:#000033;
+}
+
+a, a:visited {
+	text-decoration: none;
+	color: #111;
+    border-color: #666;
+    border-style: dotted;
+	border-width: 0 0 1px 0;
+	background-color: transparent;
+	/*background-image: url("img/000.gif");*/
+}
+
+a:link {
+	text-decoration: none;
+	color: #111;
+    border-color: #aaa;
+    border-style: dotted;
+	border-width: 0 0 0px 0;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #eee;
+	background-color: transparent;
+	text-decoration: none;
+	border-width: 0px;
+	background-image: url("../img/ccc.gif");
+}
+
+/*
+a:active {
+	text-decoration: none;
+	color: #fff;
+	background-color: #f14385;
+	text-decoration: none;
+	border-width: 0px;
+}
+*/
+
+a img {
+	text-decoration: none;
+	border-width: 1px;
+    border-color: #aaa;
+	border-style: solid;
+}
+
+a:hover img {
+	text-decoration: none;
+}
+
+a em {
+	padding-bottom: 2px; /* Hack for WebKit; otherwise the underscore padding is 0 */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #ff4100;
+    font-weight: normal;
+}
+
+hr {
+	height: 3px;
+	width: 100%;
+	text-align: center;
+	margin: 2em auto 0em auto;
+	text-align: center;
+	border: 0px none;
+	background-image: url("../img/ccc.gif");
+	/*border-top: 1px solid #aaa;
+	border-bottom: 1px solid #ccc;*/
+}
+
+ul, ul ul, ul ul ul {
+	list-style-type: disc;
+}
+
+ol {list-style: none;}
+
+li {
+	margin-left: 0em;
+}
+
+ul {
+    margin-top: 2em;
+}
+
+blockquote, pre {
+    padding: 0.25em 40px;
+    padding-top: 0px;
+    margin-top: 0px;
+	margin-left: 20px;	
+	margin-right: 10px;	
+}
+
+pre, code {
+    color: #fff;
+    font-family: 100.1% Monaco, "Lucida Console", ProFont, monospace;
+}
+
+pre {
+	background-color: inherit;
+	border-width: 1px 0 1px 0;
+	border-style: dashed;
+    line-height: 1.5em;
+}
+
+sup {
+	line-height: 0px;
+}
+sup a:link {
+	padding: 3px;
+}
+sup a:visited {
+	padding: 3px;
+}
+
+input, select  {
+	font-size: 1em;
+}
+input[type="text"], input[type="password"]   { background-color: #ddd; }
+input[type="submit"] { background-color: #ccc;  border-width: 1px; }
+select { background-color: #ddd; }
+
+/*
+	This document defines the values of custom style names
+*/
+
+/* This defines the principal block in which all the page content goes */
+#main {
+	/* appearance */
+	background-color:transparent;
+	border-width: 0px;
+	border-style: dotted;
+	/* dimensions & layout */
+	width: 830px;
+	height: 100%;
+	padding: 0px;
+	position: relative;
+	/* default text properties */
+	font-size: .85em;
+	font-weight: lighter;
+	line-height: 1.6em;
+	color: #666; /*#e5e5e5;*/
+	margin-top: 10px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+
+/* Title etc. */
+#header {
+	border-width: 0px;
+	border-style: dotted;
+	background-color: transparent;
+	
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+	width: auto;
+    
+    text-align: left;
+}
+
+#header h1 {
+	color: #99cf16;
+	font-style: italic;
+	font-size: 4em;
+	line-height: 0.9em;
+}
+
+/* main menu bar etc. */
+#menu {
+	border-width: 0px;
+	border-style: dotted;
+	background-color: transparent;
+	/*background-image: url("img/000.gif");*/
+		
+    padding-top: 0px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
+	width: auto;
+    /*display: block;*/
+	/*float: left;*/
+    
+    line-height: 1.4em;
+	font-size: .8em;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+
+#menu a {
+	/*color: #000033;*/
+	color: #fff;
+	font-weight: 500;
+	padding: 2px;
+	word-spacing: normal;
+	border-width: 0px;
+	text-decoration: none;
+	/*white-space:nowrap;*/
+	background-color: transparent;
+	/*background-image: url("../img/ccc.gif");*/
+}
+
+#menu .selected {
+	color: #fff;
+	padding: 2px;
+	background-color: #f14385;
+	/*background-image: url("../img/000.gif");*/
+}
+
+#menu a:hover {
+	color: #fff;
+	padding: 2px;
+	background-color: #ff0066;
+}
+
+#menu .menu_dropdown {
+	padding: 2px;
+	cursor: auto;
+	position: absolute;
+	visibility: hidden;
+	/*border: 1px solid #e24c68;*/
+	margin: 4px 0px 0px 0px;
+	text-align: left;
+	line-height: 1.2em;
+	/*background-color: #eeeeee;*/
+	background-image: url("../img/111.gif");
+}
+	
+#menu .menu_dropdown a
+{
+	/*color: #003366;*/
+	color: #fff;
+	font-weight: 400;
+	font-size: inherit;
+	padding: 0px;
+}
+
+#menu .menu_dropdown a:hover
+{
+	color: #ff0066;
+	background-color: #fff;
+	font-weight: 500;
+}
+
+#menu .menu_line
+{
+ 	margin: 0px 70% 2px 5px;
+	padding: 0px 0px 2px 0px;
+	border-bottom: 1px dotted #fff;
+}
+
+/* side defines the block in which sidebar/margin content will go */
+#side {
+	position: relative;
+	float: right;
+	clear: none;
+	/*display: inline;*/
+	display: block;
+	
+	border-width: 0px;
+	border-style: dotted;
+	background-color:transparent;
+	/*background-image: url("img/000.gif");*/
+    /*background-color: #1a1a1a; */
+	
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+	margin-right: 0px;
+	width: 192px;
+	min-height: 0px;
+	color: #888;
+	font-size: .8em;
+	line-height: .7em;
+}
+
+
+/* content defines the block in which the majority of the page content will go */
+#content {
+	
+	width: 580px;
+	clear: none;
+	display: inline;
+	
+	border-width: 0px;
+	background-color:transparent;
+	/*background-image: url("img/000.gif");*/
+    /*background-color: #1a1a1a; */
+	
+	padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 0px ;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+	
+	border-style: dotted;
+    /*text-align: justify;width: 745px;*/
+}
+
+#side a {
+	color: #fff;
+}
+
+#side a, #side a:visited, #side a:link, #side a:hover, #side a:active {
+	border-width: 0px;
+}
+
+
+
+.indent {
+    margin-top: 0px;
+    margin-bottom: 2em;
+	margin-left: 75px;
+	margin-right: 0px;
+}
+
+.indent_ex {
+    margin-top: 1em;
+    margin-bottom: 2em;
+	margin-left: 15px;
+	margin-right: 200px;
+}
+
+#content ul {
+    margin-top: 1em;
+    margin-bottom: 2em;
+	margin-left: 0px;
+}
+
+#content em {
+    font-style: italic;
+    font-weight: normal;
+}
+
+#content h1 {	
+    font-size: 2em;
+    line-height: 1em;
+    text-transform: uppercase;
+    letter-spacing: .25em;
+    margin-top: 1.1em;
+    margin-bottom: 1em;
+    margin-left: 0px;
+}
+#content h2 {	
+    font-size: 1.5em;
+    line-height: 1em;
+    text-transform: uppercase;
+    letter-spacing: .25em;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    margin-left: 0px;
+}
+#content h3 {
+	font-size: 1.3em;
+	line-height: 1em;
+	text-transform: uppercase;
+	letter-spacing: 0.25em;
+	padding-top: 1em;
+	padding-bottom: 0em;
+}
+
+#content hr:after {
+	content: "···";
+	letter-spacing: 2em;
+}
+
+#content img {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    border-width: 1px;
+    border-color: #aaa;
+	border-style: solid;
+    /*display: block;*/
+    /*float: right;*/
+}
+
+#content a {
+	border: 0px;
+	color: #ff4100;
+}
+
+#content a:hover {
+	border-color: #ff4100;
+    border-style: dotted;
+	border-width: 0 0 1px 0;	
+	background: none;
+}
+
+
+/* footer content */
+#footer {
+	color: #333;
+	border-width: 0px;
+	background-color: transparent;
+	border-style: dotted;
+	
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+	width: auto;
+	
+    text-align: left;
+    font-size: 0.8em;
+}
+
+.style1 {
+	margin-top: 5px;
+	font-size: 0.75em;
+	line-height: 1.8em;
+	color: #000033;
+}
