@@ -429,5 +429,5 @@ for (i in synth.outputs) {
 }
 
 // ear protection
-main = new Gibberish.Distortion({ input: main });
+main = new Gibberish.Distortion({ input: Mul(0.5, main) });
 main.connect();
