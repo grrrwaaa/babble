@@ -1401,7 +1401,7 @@ Gibberish.Sine2 = function() {
   this.__proto__ = new Gibberish.Sine();
   this.name = "sine2";
   
-  this.defineUgenProperty('pan', 0);
+  //this.defineUgenProperty('pan', 0);
   
   var sine = this.__proto__.callback,
       panner = Gibberish.makePanner(),

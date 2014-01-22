@@ -1,72 +1,10 @@
-
-/*
-	Parameter name generator
 	
-	-ne
-	-ncy
-	-ento
-	-er
-	-ation
-	-or
-	-ov
-	-ity
-	-eter
-*/
-
-var consonants = [
-	"b", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z", 
-	"ph", "th", "gh", "sh", "ch", "kk", "ng", "qu", "zh", "gn"
-];
-
-var vowels = [
-	"a", "e", "i", "o", "u", "aa", "ae", "ai", "ao", "au", "ay", "ea", "ee", "ei", "eu", "ie", "io", "iu", "oa", "oi", "oo", "ou", "ya", "ye", "yo", "yu", 
-	"ar", "er", "ir", "or", "ur", "aer", "air", "ear", "eur", "ier", "ior", "iur", "oar", "our"
-];
-
-var startings = [
-	"wa", "pha", "ra", "tu", "coa", "sy", "fi", "o", "osci", "dri", "sha", "le", "co", "re", 
-	"mo", "so", "enve", "fi", "in", "pi", "fee", "we", "ra", "de", "voi", "mi", "ma", "ste", "cen", "sta", "compre", "medi", "opt", "redu", "pea", "hi", "lo", "spe", "satu", "cla", "aer", "ba", "side", "by", "pu", "bo", "see", "mo", "boo", "fa", "hi", "wi", "ana", "digi", "tri", "pro", "pha", "te", "cho", "fla", "tri", "pli", "omni", "para", "opto", "mega", 
-	
-	"a", "e", "i", "o", "u", "aa", "ae", "ai", "ao", "au", "ea", "ei", "eu", "ou", "ar", "ir", "ur", "aer", "ear", 
-];
-
-var vendings = [
-	"ne", "nt", "nto", "ncy", "lk", "q", "k", 
-	"r", "tion", "ty", "ter", "tor", "tior", "tier", "ller",
-	"ness", "nk", "xer", "me", "ck", "put", "nal", "se", 
-	"nt", "ght", "ft", "y", "nd", "ng", "ld", "ngs", "son", 
-	"nge", "nter", "pth", "ces", "pe", "ges", "te", "ning", "ld", 
-	"rse", "nc", "ve", "sc", "llator", "ve", "pe", "vel", "lour", "fresh", "no", "lo", "lope", "lter", "vert", "tch", "back", "te", "y", "lay", "ces", "x", "n", "reo", "re", "tre", "ges", "ssion", "sium", "tron", "ction", "k", "pass", "cial", "rator", "rity", "nds", "stab", "nch", "dy", "ker", "jo", "st", "tten", "gh", "rim", "dth", "log", "tal", "gram", "ndom", "chre", "form", "type", "rus", "nance", "tron", "tude", "nnch", "cker", "bot", "ngual", 
-];
-
-function pick(arr) {
-	return arr[Math.floor(Math.random() * arr.length)];
-}
 
 //@ http://jsfromhell.com/array/shuffle [v1.0]
 function shuffle(o){ //v1.0
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
 };
-
-function paramname1(parts) {
-	var name = "";
-	name = name + pick(startings); 	
-	for (var i=1; i<parts; i++) {	
-		name = name + pick(consonants); 	
-		name = name + pick(vowels); 
-	}
-	name = name + pick(vendings); 	
-	return name.toUpperCase();
-}
-
-function paramname() {
-	if (Math.random() < 0.1) {
-		return paramname1(1) + " " + paramname1(1);
-	} else {
-		return paramname1(Math.floor(Math.random()*3));
-	}
-}	
 
 var canvas=document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -104,6 +42,7 @@ function getMouse(canvas, x, y) {
 		   };
 }
 
+
 var hslider = {
 	ondraw: function(o, ctx) {
 		var linewidth = o.h * 0.25;
@@ -118,11 +57,18 @@ var hslider = {
 	},
 	
 	ondrag: function(o, dx, dy) {
-    	o.value = clamp(o.value + keymultiplier * dx / o.w, 0, 1);
+    	o.mode.setvalue(o, o.value + keymultiplier * dx / o.w);
     },
 	
 	ondblclick: function(o, x, y) {
-    	o.value = clamp(o.value + x / o.w, 0, 1);
+    	o.mode.setvalue(o, o.value + x / o.w);
+    },
+    
+    setvalue: function(o, v) {
+    	o.value = clamp(v, 0, 1);
+    	if (o.onvaluechanged) {
+    		o.onvaluechanged(o.value);
+    	}	
     },
 };
 
@@ -145,11 +91,18 @@ var vslider = {
 	},
 	
 	ondrag: function(o, dx, dy) {
-    	o.value = clamp(o.value + keymultiplier * -dy / o.h, 0, 1);
+    	o.mode.setvalue(o, o.value + keymultiplier * -dy / o.h);
     },
 	
 	ondblclick: function(o, x, y) {
-    	o.value = clamp(o.value + y / o.h, 0, 1);
+    	o.mode.setvalue(o, o.value + y / o.h);
+    },
+    
+    setvalue: function(o, v) {
+    	o.value = clamp(v, 0, 1);
+    	if (o.onvaluechanged) {
+    		o.onvaluechanged(o.value);
+    	}	
     },
 };
 
@@ -183,7 +136,7 @@ var knob = {
 	
 	ondrag: function(o, dx, dy) {
 		// just use X and Y directly
-    	o.value = clamp(o.value + knobinc * keymultiplier * (dx - dy)/(o.radius*o.radius), 0, 1);
+    	o.mode.setvalue(o, o.value + knobinc * keymultiplier * (dx - dy)/(o.radius*o.radius), 0, 1);
     },
 	
 	ondblclick: function(o, x, y) {
@@ -191,6 +144,13 @@ var knob = {
     	var ty = y - o.h/2;
     	// get angle etc.
     	//o.value = clamp(o.value + y / o.h, 0, 1);
+    },
+    
+    setvalue: function(o, v) {
+    	o.value = clamp(v, 0, 1);
+    	if (o.onvaluechanged) {
+    		o.onvaluechanged(o.value);
+    	}	
     },
 };
 
@@ -322,49 +282,16 @@ function genModel(count) {
 		var elements = 2+Math.ceil(Math.random()*4);
 		for (i=0; i<elements && self.count > 0; i++) {
 			var o = genGroupModel(self);
-			group.controls.push(o);
+			if (Math.random() < 0.5) {
+				group.controls.push(o);		// push_back
+			} else {
+				group.controls.unshift(o);	// push_front
+			}
 		}
 		group.controls = shuffle(group.controls);
 	}
 	return group;
 }
-
-var model = { 
-	type:"panel", 
-	name:paramname(), 
-	controls: [
-		{ 	type:"panel", 
-			name:paramname(), 
-			controls:[
-				{ type:"slider", name:paramname(), value:Math.random(), },
-				{ type:"slider", name:paramname(), value:Math.random(), },
-				{ type:"slider", name:paramname(), value:Math.random(), },
-			],
-		},
-		{ 	type:"panel", 
-			name:paramname(), 
-			controls:[
-				{ 	type:"panel", 
-					name:paramname(), 
-					controls:[
-						{ type:"slider", name:paramname(), value:Math.random(), },
-						{ type:"slider", name:paramname(), value:Math.random(), },
-						{ type:"slider", name:paramname(), value:Math.random(), },
-					],
-				},
-				{ 	type:"panel", 
-					name:paramname(), 
-					controls:[
-						{ type:"slider", name:paramname(), value:Math.random(), },
-						{ type:"slider", name:paramname(), value:Math.random(), },
-						{ type:"slider", name:paramname(), value:Math.random(), },
-						{ type:"slider", name:paramname(), value:Math.random(), },
-					],
-				},
-			],
-		},
-	],
-};
 
 model = genModel(16);
 
@@ -494,8 +421,7 @@ function dblclick(e) {
 		selection = hit.target;
 		
 		// jump directly to value
-		selection.value = hit.x / selection.w; 
-    	selection.value = clamp(selection.value, 0, 1);
+    	selection.mode.setvalue(selection, hit.x / selection.w);
     	
 		dirty = true;
 	}
@@ -511,9 +437,7 @@ function mousewheel(e) {
 	if (hit) {
 		// don't change selection, just apply to target:
 		var target = hit.target;
-		
-		target.value += wheelinc * keymultiplier * e.wheelDelta;
-		target.value = clamp(target.value, 0, 1);
+		target.mode.setvalue(target, target.value + wheelinc * keymultiplier * e.wheelDelta);
 		
 		dirty = true;
 	}
@@ -540,8 +464,7 @@ function keydown(e) {
 			case 38: 
 			case 39: 
 				if (selection) {
-					selection.value += keyinc * keymultiplier;
-					selection.value = clamp(selection.value, 0, 1);
+					selection.mode.setvalue(selection, selection.value + keyinc * keymultiplier);
 					dirty = true;
 				}
 				break; //Up/Right key
@@ -549,8 +472,7 @@ function keydown(e) {
 			case 37: 
 			case 40: 
 				if (selection) {
-					selection.value -= keyinc * keymultiplier;
-					selection.value = clamp(selection.value, 0, 1);
+					selection.mode.setvalue(selection, selection.value - keyinc * keymultiplier);
 					dirty = true;
 				}
 				break; //Left/Down key
@@ -583,6 +505,9 @@ function keyup(e) {
 
 function initui() {
 	// build UI:
+	
+	console.log("model", model);
+	console.log("ui", ui);
 
 	// add callbacks:
 	canvas.onmousedown = mousedown;
@@ -604,6 +529,21 @@ function initui() {
 	window.requestAnimationFrame(draw);
 }
 
+function synth_core() {
+	return { 
+		name: gensym("sine"),
+		dsp: function(self) {
+			self.value = "new Gibberish.Sine(" 
+						+ self.controls[0].value + ", " 
+						+ self.controls[1].value + ")";
+		},
+		controls: [
+			{ name:"frequency", min: 0, max: 3200, value: 200 },
+			{ name:"amp", min: 0, max: 1, value: 1 },
+		],
+	};
+}
+
 function initsynth() {
 	
 	Gibberish.init(); 
@@ -611,14 +551,19 @@ function initsynth() {
 	Gibberish.Binops.export();
 
 	
+	
 	mod1 = new Gibberish.Sine(4, 0);
 	mod2 = new Gibberish.Sine(.1, 50); 
 	mod1.amp = mod2
 	sin = new Gibberish.Sine( Add(mod1, 440), .25 ).connect()      
 	
-	/*
-		map the UI to the synth properties
-	*/            
+	for (i in ui) {
+		var w = ui[i];
+		w.onvaluechanged = function(v) {
+			console.log("valuechanged");
+			mod1.frequency = 10 * v;
+		};
+	}	           
 	
 }
 
