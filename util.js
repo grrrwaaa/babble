@@ -22,4 +22,5 @@ function random() {
 }
 
 // initial seed from current time:
-seed( new Date().getTime() / 1000 );
+randomseed = Math.floor(new Date().getTime() / 1000);
+seed( randomseed );

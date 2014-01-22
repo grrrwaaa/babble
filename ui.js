@@ -1,6 +1,9 @@
 var canvas=document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
+document.getElementById("synthname").innerHTML = paramname() + " " + paramname();
+document.getElementById("randomseed").innerHTML = randomseed;
+
 var mousedragging = false;
 var dragstartx = 0, dragstarty = 0;
 var dirty = true;
@@ -250,6 +253,9 @@ Panel.prototype.rebuild = function() {
     this.derive_min_size();
     this.derive_size();
 	ui_list = this.tolist([]);
+	
+	dirty = true;
+	
 	return this;
 }
 
