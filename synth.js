@@ -144,12 +144,9 @@ var fx_delay = function(synth, input) {
 		default: 1,
 		replace: function(o) { 
 			//console.log("set feedback", o); 
-			ugen.feedback = new Gibberish.Distortion({ input: o }); 
+			ugen.feedback = new Gibberish.Distortion({ input: Add(0.5, Mul(o, 0.5)), }); 
 		},
-		ui: new Slider(function(v) { 
-			//console.log("set feedback", v); 
-			ugen.feedback = v*2-1; 
-		}),
+		ui: new Slider(function(v) { ugen.feedback = v; }),
 	});
 	
 	return ugen;
