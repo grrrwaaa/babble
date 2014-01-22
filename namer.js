@@ -57,7 +57,7 @@ var vendings = [
 ];
 
 function pick(arr) {
-	return arr[Math.floor(Math.random() * arr.length)];
+	return arr[Math.floor(random() * arr.length)];
 }
 
 var paramname1 = function(parts) {
@@ -72,10 +72,10 @@ var paramname1 = function(parts) {
 }
 
 function paramname() {
-	if (Math.random() < 0.1) {
+	if (random() < 0.1) {
 		return paramname1(1) + " " + paramname1(1);
 	} else {
-		return paramname1(Math.floor(Math.random()*3));
+		return paramname1(Math.floor(random()*3));
 	}
 }
 

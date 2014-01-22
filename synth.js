@@ -6,7 +6,7 @@ var apply_lfo = function(synth, ugen) {
 	if (synth.inputs.length > 0) {
 	
 		// get an existing input:
-		var index = Math.floor(Math.random() * synth.inputs.length);
+		var index = Math.floor(random() * synth.inputs.length);
 		var input = synth.inputs[index];
 	
 		// apply to this input:
@@ -130,11 +130,9 @@ var fx_delay = function(synth, input) {
 		default: 1,
 		replace: function(o) { 
 			ugen.time = Add(mindelay, Abs(Mul(o, maxdelay-mindelay))); 
-			//console.log("set time", o, delay.time); 
 		},
 		ui: new Slider(function(v) { 
 			ugen.time = mindelay + Math.abs(v) * (maxdelay - mindelay); 
-			//console.log("set time", v, delay.time); 
 		}),
 	});
 	
@@ -143,7 +141,6 @@ var fx_delay = function(synth, input) {
 		min: -1, max: 1, 
 		default: 1,
 		replace: function(o) { 
-			//console.log("set feedback", o); 
 			ugen.feedback = new Gibberish.Distortion({ input: Add(0.5, Mul(o, 0.5)), }); 
 		},
 		ui: new Slider(function(v) { ugen.feedback = v; }),
@@ -308,8 +305,8 @@ var fx_reverb = function(synth, input) {
 	console.log("reverb");
 	var ugen = new Gibberish.Reverb({ 
 		input:input, 
-		roomSize: Math.random(),
-		damping: Math.random(),
+		roomSize: random(),
+		damping: random(),
 		wet: 1,
 		dry: 1,
 	});

@@ -18,10 +18,6 @@ var minpadding = 5;
 var arcbase = Math.PI * 0.75;
 var arcrange = Math.PI * 1.5;
 
-function clamp(v, min, max) {
-    return (v < min) ? min : (v > max) ? max : v;
-};
-
 var getMouse = function (canvas, x, y) {
 	var bbox = canvas.getBoundingClientRect();
 	return { x: x - bbox.left * (canvas.width  / bbox.width),
@@ -63,7 +59,7 @@ var Slider = function(action) {
 	this.type = "slider";
 	this.iscontainer = false;
 	this.name = paramname();
-	this.value = Math.random();
+	this.value = random();
 	this.action = action;
 	return this;
 }
