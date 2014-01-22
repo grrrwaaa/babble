@@ -372,7 +372,8 @@ var root = function(synth) {
 
 function makesynth() {
 
-	Gibberish.init(); 
+	// reset
+	Gibberish.clear(); 
 	ui = new Panel();
 
 	var synth = {
