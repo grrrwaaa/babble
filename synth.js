@@ -370,58 +370,77 @@ var root = function(synth) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-var synth = {
-	// list of all available inputs to connect to:
-	inputs: [],
+function makesynth() {
+
+	Gibberish.init(); 
+	ui = new Panel();
+
+	var synth = {
+		// list of all available inputs to connect to:
+		inputs: [],
 	
-	// current output:
-	outputs: [],
+		// current output:
+		outputs: [],
 	
-	// code fragments:
-	fragments: [],
-};
+		// code fragments:
+		fragments: [],
+	};
 
-/*
-	Figure we could go for a two-pronged attack here.
-	Create a bunch of LFO panels, and a bunch of FX panels.
-	Apply some fx to 
-*/
+	/*
+		Figure we could go for a two-pronged attack here.
+		Create a bunch of LFO panels, and a bunch of FX panels.
+		Apply some fx to 
+	*/
 
-root(synth);
-while (synth.inputs.length < 14) {
-	modulate(synth);
-}
+	root(synth);
+	while (synth.inputs.length < 14) {
+		modulate(synth);
+	}
 
-var panels = [];
+	var panels = [];
 
-for (i in synth.inputs) {
-	var input = synth.inputs[i];
-	input.ui.action(input.ui.value);
-	if (i < 5) {
-		var p = new Panel();
-		panels[i] = p;
-		if (i < 3) {
-			ui.add(p);
+	for (i in synth.inputs) {
+		var input = synth.inputs[i];
+		input.ui.action(input.ui.value);
+		if (i < 5) {
+			var p = new Panel();
+			panels[i] = p;
+			if (i < 3) {
+				ui.add(p);
+			} else {
+				pick(panels).add(p);
+			}
+			p.add(input.ui);
 		} else {
-			pick(panels).add(p);
+			pick(panels).add(input.ui);
 		}
-		p.add(input.ui);
-	} else {
-		pick(panels).add(input.ui);
 	}
-}
-ui.rebuild();
+	ui.rebuild();
 
-var main;
-console.log("outputs", synth.outputs.length);
-for (i in synth.outputs) {
-	if (i == 0) {
-		main = synth.outputs[i];
-	} else {
-		main = Add(main, synth.outputs[i]); //Mul(Add(main, synth.outputs[i]), 0.7);
+	var main;
+	console.log("outputs", synth.outputs.length);
+	for (i in synth.outputs) {
+		if (i == 0) {
+			main = synth.outputs[i];
+		} else {
+			main = Add(main, synth.outputs[i]); //Mul(Add(main, synth.outputs[i]), 0.7);
+		}
 	}
+
+	// ear protection
+	main = new Gibberish.Distortion({ input: Mul(0.5, main) });
+	main.connect();
 }
 
-// ear protection
-main = new Gibberish.Distortion({ input: Mul(0.5, main) });
-main.connect();
+makesynth();
+
+window.addEventListener("error", function(errorEvent) {
+	// Add your error handling here
+    console.log("error", errorEvent.message);
+    
+    // try again:
+    makesynth();
+    
+    // if returns true, the error is suppressed and not thrown
+    return true;
+});
