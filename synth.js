@@ -120,10 +120,8 @@ var modulate = function(synth) {
 var maxdelay = 44100 / 2;
 var mindelay = maxdelay / 128;
 
-var root = function(synth) {
-	var ugen = modulate(synth);
-	
-	var delay = new Gibberish.Delay({ input:ugen, time:maxdelay, feedback: 0.1, });
+var fx = function(synth, input) {
+	var delay = new Gibberish.Delay({ input:input, time:maxdelay, feedback: 0.1, });
 	
 	synth.inputs.push({ 
 		type: "audible", 
@@ -154,6 +152,15 @@ var root = function(synth) {
 	});
 	
 	return delay;
+}
+
+var root = function(synth) {
+	var ugen = modulate(synth);
+	
+	ugen = fx(synth, ugen);
+	ugen = Add(ugen, fx(synth, ugen));
+	
+	return ugen;
 }
 
 
